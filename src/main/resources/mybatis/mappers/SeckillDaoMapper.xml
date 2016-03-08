@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sohu.dao.SeckillDao">
+	<update id="reduceStock">
+			update seckill_table
+				set num=num-1
+			where id=#{id} and #{nowTime}>=start_time and num>0;
+	</update>
+	
+	<select id="queryBySeckillid" parameterType="long"  resultType="Seckill">
+			select * from 	
+				seckill_table
+			where id=#{queryid};
+	</select>
+	
+	<select id="querySeckill" resultType="Seckill">
+			select * from seckill_table limit #{offset},#{limit};
+	</select>
+	
+	<select id="promoteExecute" statementType="CALLABLE" parameterMap="promoteExecuteMap">
+		call execute_seckill(?,?,?,?)
+	</select>
+	
+	<parameterMap type="map" id="promoteExecuteMap">  
+	   <parameter property="id" jdbcType="VARCHAR" mode="IN"/>  
+	   <parameter property="phone" jdbcType="VARCHAR" mode="IN"/>  
+	   <parameter property="time" jdbcType="DATE" mode="IN"/>  
+	   <parameter property="result" jdbcType="INTEGER" mode="OUT"/> 
+ 	</parameterMap>
+</mapper>
