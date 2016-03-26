@@ -56,7 +56,7 @@
 	</bean>
 	
 	<bean id="redisDao" class="com.sohu.dao.redis.RedisDao">
-		<constructor-arg index="0" value="10.10.88.223"/>
+		<constructor-arg index="0" value="XXXX"/>
 		<constructor-arg index="1" value="6888"/>
 	</bean>
 </beans>
