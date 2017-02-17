@@ -57,6 +57,9 @@
  $(function(){
         seckill.loginCheck(${seckill.id},${seckill.startTime.time},${seckill.endTime.time});
         $('#phoneBtn').click(function(){
+            //$.cookie('jiafuwei','jiafuwei',{expire:700,path:'/Seckill'});
+            //var jiafuwei = $.cookie('jiafuwei');
+            //console.info(jiafuwei);　
             seckill.inputCheck(${seckill.id},$('#phoneTxt').val());
         });
     });

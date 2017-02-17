@@ -1,25 +1,30 @@
 var seckill= {
     URL: {
         exposeUrl:function(seckillId){
-            return "/seckill/"+seckillId+"/exposeUrl";
+            return "/Seckill/seckill/"+seckillId+"/exposeUrl";
         },
         executeUrl:function(seckillId,md5){
            /* return "/seckill/"+seckillId+"/"+md5+"/execute";*/
-        	return "/seckill/"+seckillId+"/"+md5+"/executePromote"
+        	return "/Seckill/seckill/"+seckillId+"/"+md5+"/executePromote"
         },
         nowSysTimeUrl:function(){
-            return "/seckill/time/now";
+            return "/Seckill/seckill/time/now";
         }
     },
     inputCheck:function(seckillId,param){
-        if(!param||param.length!=11||isNaN(param)){
+    	var flag = false;
+    	var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+    	if(myreg.test(param)){
+    		flag = true;
+    	}
+        if(!flag){
             $('#phoneTxt').val("");
             $('#errorMsg').hide(function(){
                 $('#errorMsg').html('输入手机格式不正确！').show();
             });
         }else{
             $('#phoneTxt').val("");
-            $.cookie('phone',param,{expire:7,path:'/seckill'});
+            $.cookie('phone',param,{expire:7,path:'/Seckill'});
             $('#phoneModal').modal('toggle');
             seckill.loginCheck(seckillId);
         }
@@ -47,6 +52,7 @@ var seckill= {
         });
     },
     loginCheck:function(seckillId,startTime,endTime){
+        //var phone=seckillId;
         var phone=$.cookie('phone');
         if(phone){
             $.get(seckill.URL.nowSysTimeUrl(),{},function(result){

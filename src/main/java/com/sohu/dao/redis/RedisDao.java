@@ -38,6 +38,7 @@ public class RedisDao {
     public Seckill getSeckill(long seckillId){
         try {
             Jedis jedis=jedisPool.getResource();
+            jedis.auth("123456");
             try {
                 String key="seckill:"+seckillId;
                 byte[] bytes=jedis.get(key.getBytes());
@@ -57,6 +58,7 @@ public class RedisDao {
     public String putSeckill(Seckill seckill){
         try {
             Jedis jedis=jedisPool.getResource();
+            jedis.auth("123456");
             try {
                 String key="seckill:"+seckill.getId();
                byte[] bytes=ProtostuffIOUtil.toByteArray(seckill, schema, LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
