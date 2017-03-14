@@ -33,4 +33,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     
+	<!-- 载入常用的配置 -->
+    <!-- <context:property-placeholder location="
+        classpath:spring/redis.properties"/> -->
+    <!-- <import resource="classpath:redis/spring-redis.xml"/> -->
 </beans>
